@@ -17,7 +17,7 @@ void System::startApp() {
         if (p.getCmdName() == "quit"){
             break;
         }
-        ICMD* command = CreateCmdFactory::create(p.getCmdName());
+        ICMD* command = CreateCmdFactory::create(p);
         command->run(p);
     }
 
