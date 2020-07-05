@@ -7,8 +7,13 @@
 
 #include "creation_command.h"
 
+
 class NewCMD: public CreationCMD{
-    void run();
+public:
+    NewCMD(const Parser& params);
+    void run(const Parser& params);
+
+private:
 };
 
 #endif //DNA_NEW_CMD_H

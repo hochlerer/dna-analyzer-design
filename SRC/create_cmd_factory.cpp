@@ -8,9 +8,9 @@
 #include "create_cmd_factory.h"
 
 
-ICMD *CreateCmdFactory::create(const std::string &command) {
-    if(command == "new"){
-        return new NewCMD;
+ICMD *CreateCmdFactory::create(const Parser& p) {
+    if(p.getCmdName() == "new"){
+        return new NewCMD(p);
     }
     return NULL;
 }

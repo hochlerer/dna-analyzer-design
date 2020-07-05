@@ -10,7 +10,7 @@ class ICMD;
 
 class CreateCmdFactory{
 public:
-    static ICMD* create(const std::string& command);
+    static ICMD* create(const Parser& p);
 };
 
 #endif //DNA_CREATE_CMD_FACTORY_H
