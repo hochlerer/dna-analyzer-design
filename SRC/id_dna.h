@@ -9,7 +9,9 @@
 
 class IdDna{
 public:
+    IdDna(size_t id = 0):m_id(id){}
     size_t getId()const {return m_id;}
+    const IdDna operator++();
 private:
     size_t m_id;
 };

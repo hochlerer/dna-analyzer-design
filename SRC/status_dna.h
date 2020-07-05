@@ -9,6 +9,7 @@
 
 class StatusDna{
 public:
+    StatusDna(const std::string& status):m_status(status){}
 private:
     std::string m_status;
 };

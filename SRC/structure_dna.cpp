@@ -14,3 +14,4 @@ std::map<NameDna, IdDna> &StructureDna::getNameStructure() {
     return nameStructure;
 }
 
+IdDna DnaMetaData::m_idDna;
