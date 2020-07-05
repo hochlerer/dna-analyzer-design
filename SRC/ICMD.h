@@ -4,9 +4,14 @@
 
 #ifndef DNA_ICMD_H
 #define DNA_ICMD_H
+#include <vector>
+#include <string>
 
 class ICMD{
-    virtual void run() = 0;
+public:
+    virtual void run(const std::vector<std::string>& params) = 0;
+
+private:
 };
 
 #endif //DNA_ICMD_H
