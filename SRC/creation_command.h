@@ -8,7 +8,10 @@
 #include "ICMD.h"
 
 class CreationCMD: public ICMD{
-    /*virtual*/ void run() =0;
+public:
+    /*virtual*/ void run(const std::vector<std::string>& params) =0;
+
+private:
 };
 
 #endif //DNA_CREATION_COMMAND_H
