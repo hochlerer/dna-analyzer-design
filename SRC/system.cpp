@@ -18,7 +18,7 @@ void System::startApp() {
             break;
         }
         ICMD* command = CreateCmdFactory::create(p.getCmdName());
-        command->run(p.getParams());
+        command->run(p);
     }
 
 }

@@ -9,13 +9,8 @@ std::map<IdDna, DnaMetaData> &StructureDna::getIdStructure() {
     return idStructure;
 }
 
-std::map<NameDna, DnaMetaData*> &StructureDna::getNameStructure() {
-    static std::map<NameDna,DnaMetaData*> nameStructure;
+std::map<NameDna, IdDna> &StructureDna::getNameStructure() {
+    static std::map<NameDna,IdDna> nameStructure;
     return nameStructure;
-}
-
-std::map<StatusDna, DnaMetaData*> &StructureDna::getStatusStructure() {
-    static std::map<StatusDna,DnaMetaData*> statusStructure;
-    return statusStructure;
 }
 

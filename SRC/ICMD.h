@@ -4,12 +4,12 @@
 
 #ifndef DNA_ICMD_H
 #define DNA_ICMD_H
-#include <vector>
+#include "parser.h"
 #include <string>
 
 class ICMD{
 public:
-    virtual void run(const std::vector<std::string>& params) = 0;
+    virtual void run(const Parser& params) = 0;
 
 private:
 };

@@ -3,7 +3,7 @@
 //
 #include "parser.h"
 
-void Parser::parseCmd(std::string& cmd) {
+void Parser::parseCmd(std::string cmd) {
     size_t pos =0;
     if((pos = cmd.find(' ')) == std::string::npos){
         m_commandName = cmd;

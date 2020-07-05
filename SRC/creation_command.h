@@ -9,7 +9,7 @@
 
 class CreationCMD: public ICMD{
 public:
-    /*virtual*/ void run(const std::vector<std::string>& params) =0;
+    /*virtual*/ void run(const Parser& params) =0;
 
 private:
 };
