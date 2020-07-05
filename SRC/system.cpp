@@ -7,11 +7,12 @@
 #include "parser.h"
 #include "ICMD.h"
 #include "create_cmd_factory.h"
+#include <iostream>
 
 void System::startApp() {
-    KeyboardReader input;
-    Parser p;
     while (true){
+        KeyboardReader input;
+        Parser p;
         input.read();
         p.parseCmd(input.getStr());
         if (p.getCmdName() == "quit"){

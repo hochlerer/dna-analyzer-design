@@ -6,8 +6,9 @@
 #include <iostream>
 
 void KeyboardReader::read() {
-    std::cout<<"Enter your string: ";
-    std::cin>>m_str;
+    std::string str;
+    std::cout<<"> cmd >>> ";
+    std::getline(std::cin, m_str, '\n');
     std::cout<<std::endl;
 }
 
