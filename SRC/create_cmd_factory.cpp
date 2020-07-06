@@ -12,6 +12,6 @@ ICMD *CreateCmdFactory::create(const Parser& p) {
     if(p.getCmdName() == "new"){
         return new NewCMD(p);
     }
-    //return NULL;
+    return NULL;
 }
 

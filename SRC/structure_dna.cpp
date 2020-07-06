@@ -4,14 +4,12 @@
 
 #include "structure_dna.h"
 
-std::map<IdDna, DnaMetaData*> &StructureDna::getIdStructure() {
+std::map<IdDna, DnaMetaData*>& StructureDna::getIdStructure() {
     static std::map<IdDna,DnaMetaData*> idStructure;
     return idStructure;
 }
 
-std::map<NameDna, IdDna> &StructureDna::getNameStructure() {
-    static std::map<NameDna,IdDna> nameStructure;
+std::map<NameDna, DnaMetaData*>& StructureDna::getNameStructure() {
+    static std::map<NameDna,DnaMetaData*> nameStructure;
     return nameStructure;
 }
-
-IdDna DnaMetaData::m_idDna;

@@ -12,6 +12,7 @@ public:
     IdDna(size_t id = 0):m_id(id){}
     size_t getId()const {return m_id;}
     const IdDna operator++();
+    const IdDna& operator-=(size_t i);
 
 private:
     size_t m_id;

@@ -7,12 +7,15 @@
 #include "parser.h"
 #include "ICMD.h"
 #include "create_cmd_factory.h"
-#include <iostream>
+#include "screen_writer.h"
+
 
 void System::startApp() {
     while (true){
         KeyboardReader input;
+        ScreenWriter sw;
         Parser p;
+        std::string output;
         input.read();
         p.parseCmd(input.getStr());
         if (p.getCmdName() == "quit"){
@@ -20,6 +23,8 @@ void System::startApp() {
         }
         ICMD* command = CreateCmdFactory::create(p);
         command->run(p);
+        output = command->printAfterCommand();
+        sw.write(output.c_str());
     }
 
 }

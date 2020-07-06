@@ -11,7 +11,8 @@
 class NewCMD: public CreationCMD{
 public:
     NewCMD(const Parser& params);
-    void run(const Parser& params);
+    /*virtual*/ void run(const Parser& params);
+    /*virtual*/ std::string printAfterCommand()const ;
 
 private:
 };

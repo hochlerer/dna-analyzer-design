@@ -10,6 +10,7 @@
 class ICMD{
 public:
     virtual void run(const Parser& params) = 0;
+    virtual std::string printAfterCommand()const =0;
 
 private:
 };

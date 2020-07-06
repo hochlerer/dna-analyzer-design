@@ -26,4 +26,11 @@ void NewCMD::run(const Parser &params) {
     }
     DnaMetaData* newDna = new DnaMetaData(params.getParams()[0], dnaName, (std::string)"new");
     StructureDna::getIdStructure().insert(std::pair<IdDna, DnaMetaData*> (DnaMetaData::getId(), newDna));
+    StructureDna::getNameStructure().insert(std::pair<NameDna,DnaMetaData*> (dnaName, newDna));
+}
+
+std::string NewCMD::printAfterCommand()const {
+    std::stringstream idStr;
+    idStr << StructureDna::getIdStructure()[DnaMetaData::getId()]->getId().getId();
+    return "[" + idStr.str() + "]" + " " + StructureDna::getIdStructure()[DnaMetaData::getId()]->getName().getNameDna() +": " + StructureDna::getIdStructure()[DnaMetaData::getId()]->getDnaSeq()->getSeq() + "\n";
 }

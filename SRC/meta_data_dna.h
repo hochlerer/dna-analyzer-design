@@ -11,14 +11,14 @@
 
 class DnaMetaData{
 public:
-    DnaMetaData(const DnaSequence& dnaSeq, const NameDna& name, const StatusDna& status): m_dna(dnaSeq), m_nameDna(name), m_statusDna(status) {}
-    static IdDna getId() {return ++m_idDna;}
+    DnaMetaData(const DnaSequence& dnaSeq, const NameDna& name, const StatusDna& status): m_dna(new DnaSequence(dnaSeq)), m_nameDna(name), m_statusDna(status) {++m_idDna;}
+    static IdDna getId() {return m_idDna;}
     NameDna getName()const {return m_nameDna;}
     StatusDna getStatus()const {return m_statusDna;}
-    const DnaSequence getDnaSeq()const {return m_dna;}
+    const DnaSequence* getDnaSeq()const {return m_dna;}
 
 private:
-    DnaSequence m_dna;
+    DnaSequence* m_dna;
     NameDna m_nameDna;
     StatusDna m_statusDna;
     static IdDna m_idDna;

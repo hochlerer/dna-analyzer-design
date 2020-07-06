@@ -9,11 +9,13 @@
 
 class NameDna{
 public:
-    NameDna(const std::string& name = ""):m_name(name){}
+    NameDna(const std::string& name):m_name(name){}
     const std::string& getNameDna()const {return m_name;}
 
 private:
     std::string m_name;
 };
+
+bool operator<(const NameDna& name1, const NameDna& name2);
 
 #endif //DNA_NAME_DNA_H
