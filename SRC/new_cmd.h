@@ -8,9 +8,9 @@
 #include "creation_command.h"
 
 
-class NewCMD: public CreationCMD{
+class NewCmd: public CreationCmd{
 public:
-    NewCMD(const Parser& params);
+    NewCmd(const Parser& params);
     /*virtual*/ void run(const Parser& params);
     /*virtual*/ std::string printAfterCommand()const ;
 

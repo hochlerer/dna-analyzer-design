@@ -7,18 +7,17 @@
 #include "new_cmd.h"
 #include "structure_dna.h"
 
-NewCMD::NewCMD(const Parser& params) {
+NewCmd::NewCmd(const Parser& params) {
     if(params.getParams().size() < 1 || params.getParams().size() > 2){
         throw std::invalid_argument("INVALID NUMS OF ARGUMENT");
     }
 }
 
-void NewCMD::run(const Parser &params) {
-    static size_t countDna =0;
+void NewCmd::run(const Parser &params) {
     std::stringstream ss;
     std::string dnaName;
     if(params.getParams().size() == 1 ){
-        ss << "seq" << ++countDna;
+        ss << "seq" << ++CreationCmd::s_countDna;
         dnaName = ss.str();
     }
     else {
@@ -29,7 +28,7 @@ void NewCMD::run(const Parser &params) {
     StructureDna::getNameStructure().insert(std::pair<NameDna,DnaMetaData*> (dnaName, newDna));
 }
 
-std::string NewCMD::printAfterCommand()const {
+std::string NewCmd::printAfterCommand()const {
     std::stringstream idStr;
     idStr << StructureDna::getIdStructure()[DnaMetaData::getId()]->getId().getId();
     return "[" + idStr.str() + "]" + " " + StructureDna::getIdStructure()[DnaMetaData::getId()]->getName().getNameDna() +": " + StructureDna::getIdStructure()[DnaMetaData::getId()]->getDnaSeq()->getSeq() + "\n";

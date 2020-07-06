@@ -7,12 +7,13 @@
 
 #include "ICMD.h"
 
-class CreationCMD: public ICMD{
+class CreationCmd: public ICMD{
 public:
     /*virtual*/ void run(const Parser& params) =0;
     /*virtual*/ std::string printAfterCommand()const =0;
 
-private:
+protected:
+    static size_t s_countDna;
 };
 
 #endif //DNA_CREATION_COMMAND_H
