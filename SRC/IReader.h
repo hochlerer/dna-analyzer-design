@@ -9,6 +9,7 @@
 class IReader{
 public:
     virtual ~IReader(){}
+    virtual void read() =0;
     virtual const std::string& getStr()const = 0;
 };
 
