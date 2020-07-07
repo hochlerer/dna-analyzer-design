@@ -9,8 +9,7 @@
 
 class CreationCmd: public ICMD{
 public:
-    /*virtual*/ void run(const Parser& params) =0;
-    /*virtual*/ std::string printAfterCommand()const =0;
+    /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure ,IWriter& output) =0;
 
 protected:
     static size_t s_countDna;

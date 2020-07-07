@@ -6,10 +6,11 @@
 #define DNA_TERMINAL_H
 #include "IReader.h"
 #include "IWriter.h"
+#include "structure_dna.h"
 
 class Terminal{
 public:
-    void start(IReader* input, IWriter* output);
+    void start(IReader& input, IWriter& output, StructureDna& dnaStructure);
 };
 
 #endif //DNA_TERMINAL_H

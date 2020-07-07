@@ -6,11 +6,12 @@
 #define DNA_ICMD_H
 #include "parser.h"
 #include <string>
+#include "structure_dna.h"
+#include "IWriter.h"
 
 class ICMD{
 public:
-    virtual void run(const Parser& params) = 0;
-    virtual std::string printAfterCommand()const =0;
+    virtual void run(const Parser& params, StructureDna& dnaStructure ,IWriter& output) = 0;
 
 private:
 };

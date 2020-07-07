@@ -11,10 +11,10 @@
 class NewCmd: public CreationCmd{
 public:
     NewCmd(const Parser& params);
-    /*virtual*/ void run(const Parser& params);
-    /*virtual*/ std::string printAfterCommand()const ;
+    /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure ,IWriter& output);
 
 private:
+    void printAfterCommand(StructureDna& dnaStructure ,IWriter& output)const ;
 };
 
 #endif //DNA_NEW_CMD_H

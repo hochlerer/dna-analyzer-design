@@ -13,7 +13,7 @@ NewCmd::NewCmd(const Parser& params) {
     }
 }
 
-void NewCmd::run(const Parser &params) {
+void NewCmd::run(const Parser &params, StructureDna& dnaStructure ,IWriter& output) {
     std::stringstream ss;
     std::string dnaName;
     if(params.getParams().size() == 1 ){
@@ -24,12 +24,14 @@ void NewCmd::run(const Parser &params) {
         dnaName = params.getParams()[1];
     }
     DnaMetaData* newDna = new DnaMetaData(params.getParams()[0], dnaName, (std::string)"new");
-    StructureDna::getIdStructure().insert(std::pair<IdDna, DnaMetaData*> (DnaMetaData::getId(), newDna));
-    StructureDna::getNameStructure().insert(std::pair<NameDna,DnaMetaData*> (dnaName, newDna));
+    dnaStructure.addDna(newDna);
+    printAfterCommand(dnaStructure, output);
 }
 
-std::string NewCmd::printAfterCommand()const {
+void NewCmd::printAfterCommand(StructureDna& dnaStructure ,IWriter& output)const {
     std::stringstream idStr;
-    idStr << StructureDna::getIdStructure()[DnaMetaData::getId()]->getId().getId();
-    return "[" + idStr.str() + "]" + " " + StructureDna::getIdStructure()[DnaMetaData::getId()]->getName().getNameDna() +": " + StructureDna::getIdStructure()[DnaMetaData::getId()]->getDnaSeq()->getSeq() + "\n";
+    std::string  strToPrint;
+    idStr << dnaStructure.getIdStructure()[DnaMetaData::getId()]->getId().getId();
+    strToPrint = "[" + idStr.str() + "]" + " " + dnaStructure.getIdStructure()[DnaMetaData::getId()]->getName().getNameDna() +": " + dnaStructure.getIdStructure()[DnaMetaData::getId()]->getDnaSeq()->getSeq() + "\n";
+    output.write(strToPrint.c_str());
 }

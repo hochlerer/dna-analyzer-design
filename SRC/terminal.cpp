@@ -11,16 +11,16 @@
 #include "screen_writer.h"
 #include "terminal.h"
 
-void Terminal::start(IReader *input, IWriter *output) {
+void Terminal::start(IReader& input, IWriter& output, StructureDna& dnaStructure) {
     while (true){
         Parser p;
-        input->read();
-        p.parseCmd(input->getStr());
+        input.read();
+        p.parseCmd(input.getStr());
         if (p.getCmdName() == "quit") {
             break;
         }
         ICMD *command = CreateCmdFactory::create(p);
-        command->run(p);
+        command->run(p, dnaStructure, output);
     }
 }
 

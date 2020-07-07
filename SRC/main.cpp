@@ -186,7 +186,7 @@ int main() {
     KeyboardReader read;
     ScreenWriter write;
     System s;
-    s.startApp(&read, &write);
+    s.startApp(read, write);
 
 
     std::cout<< "end of program" <<std::endl;

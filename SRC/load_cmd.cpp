@@ -13,10 +13,10 @@ LoadCmd::LoadCmd(const Parser &params) {
     }
 }
 
-void LoadCmd::run(const Parser &params) {
+void LoadCmd::run(const Parser &params, StructureDna& dnaStructure ,IWriter& output) {
     std::string dnaName, dnaSeq;
-    FileReader file;
-    file.read(params.getParams()[0].c_str());
+    FileReader file(params.getParams()[0].c_str());
+    file.read();
     dnaSeq = file.getStr();
 
     if(params.getParams().size() == 1 ){
@@ -27,20 +27,20 @@ void LoadCmd::run(const Parser &params) {
     }
 
     DnaMetaData* newDna = new DnaMetaData(dnaSeq, dnaName, (std::string)"new");
-    StructureDna::getIdStructure().insert(std::pair<IdDna, DnaMetaData*> (DnaMetaData::getId(), newDna));
-    StructureDna::getNameStructure().insert(std::pair<NameDna,DnaMetaData*> (dnaName, newDna));
-
+    dnaStructure.addDna(newDna);
+    printAfterCommand(dnaStructure, output);
 }
 
-std::string LoadCmd::printAfterCommand() const {
-    std::string dnaSeq = StructureDna::getIdStructure()[DnaMetaData::getId()]->getDnaSeq()->getSeq();
+void LoadCmd::printAfterCommand(StructureDna& dnaStructure ,IWriter& output) const {
+    std::string dnaSeq = dnaStructure.getIdStructure()[DnaMetaData::getId()]->getDnaSeq()->getSeq();
     size_t lngDna  = dnaSeq.size();
     if(40 < lngDna){
         dnaSeq = dnaSeq.substr(0, 31) + "..." + dnaSeq.substr(lngDna-4, lngDna-1);
     }
     std::stringstream idStr;
-    idStr << StructureDna::getIdStructure()[DnaMetaData::getId()]->getId().getId();
-    return "[" + idStr.str() + "]" + " " + StructureDna::getIdStructure()[DnaMetaData::getId()]->getName().getNameDna() +": " + dnaSeq + "\n";
-
+    std::string strToPrint;
+    idStr << dnaStructure.getIdStructure()[DnaMetaData::getId()]->getId().getId();
+    strToPrint = "[" + idStr.str() + "]" + " " + dnaStructure.getIdStructure()[DnaMetaData::getId()]->getName().getNameDna() +": " + dnaSeq + "\n";
+    output.write(strToPrint.c_str());
 }
 

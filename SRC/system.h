@@ -9,7 +9,7 @@ class IWriter;
 
 class System{
 public:
-    void startApp(IReader* input, IWriter* output);
+    void startApp(IReader& input, IWriter& output);
 
 private:
 };
