@@ -8,24 +8,11 @@
 #include "ICMD.h"
 #include "create_cmd_factory.h"
 #include "screen_writer.h"
+#include "terminal.h"
 
-
-void System::startApp() {
-    while (true){
-        KeyboardReader input;
-        ScreenWriter sw;
-        Parser p;
-        std::string output;
-        input.read();
-        p.parseCmd(input.getStr());
-        if (p.getCmdName() == "quit"){
-            break;
-        }
-        ICMD* command = CreateCmdFactory::create(p);
-        command->run(p);
-        output = command->printAfterCommand();
-        sw.write(output.c_str());
-    }
+void System::startApp(IReader* input, IWriter* output) {
+    Terminal cmd;
+    cmd.start(input, output);
 
 }
 
