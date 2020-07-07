@@ -183,8 +183,10 @@ int main() {
     testIReaderctor();
     testIWriter();
 */
+    KeyboardReader read;
+    ScreenWriter write;
     System s;
-    s.startApp();
+    s.startApp(&read, &write);
 
 
     std::cout<< "end of program" <<std::endl;
