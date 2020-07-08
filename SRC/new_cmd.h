@@ -15,6 +15,7 @@ public:
 
 private:
     void printAfterCommand(StructureDna& dnaStructure ,IWriter& output)const ;
+    bool isValid(const Parser& params);
 };
 
 #endif //DNA_NEW_CMD_H
