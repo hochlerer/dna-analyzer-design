@@ -6,6 +6,7 @@
 #define DNA_CREATE_CMD_FACTORY_H
 
 #include <string>
+class Parser;
 class ICMD;
 
 class CreateCmdFactory{

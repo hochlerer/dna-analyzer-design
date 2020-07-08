@@ -34,7 +34,6 @@ void LoadCmd::run(const Parser &params, StructureDna& dnaStructure ,IWriter& out
     dnaSeq = file.getStr();
 
     if(params.getParams().size() == 1 ){
-        dnaStructure.findDna(fileName).increaseCounter();
         dnaName = fileName ;
         while (dnaStructure.isExistDna(dnaName)) {
             dnaStructure.findDna(dnaName).increaseCounter();

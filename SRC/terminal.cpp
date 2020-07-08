@@ -19,8 +19,14 @@ void Terminal::start(IReader& input, IWriter& output, StructureDna& dnaStructure
         if (p.getCmdName() == "quit") {
             break;
         }
-        ICMD *command = CreateCmdFactory::create(p);
-        command->run(p, dnaStructure, output);
+        try {
+            ICMD *command = CreateCmdFactory::create(p);
+            command->run(p, dnaStructure, output);
+        }
+        catch (std::invalid_argument e) {
+            output.write(e.what());
+            output.write("please enter again\n");
+        }
     }
 }
 

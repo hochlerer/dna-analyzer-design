@@ -6,6 +6,7 @@
 #include "new_cmd.h"
 #include "load_cmd.h"
 #include "dup_cmd.h"
+#include "save_cmd.h"
 #include "create_cmd_factory.h"
 
 
@@ -18,6 +19,9 @@ ICMD *CreateCmdFactory::create(const Parser& p) {
     }
     if(p.getCmdName() == "dup"){
         return new DupCmd(p);
+    }
+    if(p.getCmdName() == "save"){
+        return new SaveCmd(p);
     }
     return NULL;
 }

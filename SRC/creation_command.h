@@ -11,8 +11,6 @@ class CreationCmd: public ICMD{
 public:
     /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure ,IWriter& output) =0;
 
-protected:
-    static size_t s_countDna;
 };
 
 #endif //DNA_CREATION_COMMAND_H

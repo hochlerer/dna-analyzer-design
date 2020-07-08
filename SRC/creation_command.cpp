@@ -4,4 +4,3 @@
 
 #include "creation_command.h"
 
-size_t CreationCmd::s_countDna =0;
