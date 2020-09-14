@@ -1,12 +1,13 @@
 #include <iostream>
 #include <fstream>
-#include "dna_sequence.h"
+#include "model/dna_sequence.h"
 #include "list"
-#include "file_reader.h"
-#include "keyboard_reader.h"
-#include "file_writer.h"
-#include "screen_writer.h"
-#include "system.h"
+#include "view/file_reader.h"
+#include "view/keyboard_reader.h"
+#include "view/file_writer.h"
+#include "view/terminal.h"
+#include "view/screen_writer.h"
+#include "controller/system.h"
 
 /*
 void tetCharCtor(){
@@ -188,7 +189,8 @@ int main() {
     KeyboardReader read;
     ScreenWriter write;
     System s;
-    s.startApp(read, write);
+    Terminal terminal;
+    s.startApp(terminal , read, write);
 
 
     std::cout<< "end of program" <<std::endl;

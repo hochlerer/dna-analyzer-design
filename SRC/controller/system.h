@@ -6,10 +6,11 @@
 #define DNA_SYSTEM_H
 class IReader;
 class IWriter;
+class UI;
 
 class System{
 public:
-    void startApp(IReader& input, IWriter& output);
+    void startApp(UI& ui, IReader& input, IWriter& output);
 
 private:
 };

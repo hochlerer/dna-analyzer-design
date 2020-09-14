@@ -3,11 +3,12 @@
 //
 
 #include "terminal.h"
-#include "parser.h"
-#include "ICMD.h"
-#include "create_cmd_factory.h"
+#include "../controller/parser.h"
+#include "../controller/ICMD.h"
+#include "../controller/create_cmd_factory.h"
 
 void Terminal::start(IReader& input, IWriter& output, StructureDna& dnaStructure) {
+    CreateCmdFactory::init();
 
     while (true){
         Parser p;

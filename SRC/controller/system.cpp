@@ -3,15 +3,13 @@
 //
 
 #include "system.h"
-#include "structure_dna.h"
+#include "../model/structure_dna.h"
 #include "ICMD.h"
-#include "create_cmd_factory.h"
-#include "terminal.h"
+#include "../view/UI.h"
 
-void System::startApp(IReader& input, IWriter& output) {
+void System::startApp(UI& ui, IReader& input, IWriter& output) {
     StructureDna dnaStructure;
-    Terminal cmd;
-    cmd.start(input, output, dnaStructure);
+    ui.start(input, output, dnaStructure);
 
 }
 
