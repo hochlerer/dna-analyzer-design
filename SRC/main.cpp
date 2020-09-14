@@ -6,6 +6,8 @@
 #include "keyboard_reader.h"
 #include "file_writer.h"
 #include "screen_writer.h"
+#include "system.h"
+
 /*
 void tetCharCtor(){
     char d[] = {"AAAA"};
@@ -164,7 +166,7 @@ void testIWriter(){
 }
 */
 
-#include "system.h"
+
 
 int main() {
     std::cout<<"---main---"<<std::endl;

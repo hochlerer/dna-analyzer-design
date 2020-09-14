@@ -11,7 +11,12 @@ class ICMD;
 
 class CreateCmdFactory{
 public:
+    static std::map<std::string, ICMD*> init();
     static ICMD* create(const Parser& p);
+    static void release();
+
+private:
+    static std::map<std::string, ICMD*> s_commands;
 };
 
 #endif //DNA_CREATE_CMD_FACTORY_H

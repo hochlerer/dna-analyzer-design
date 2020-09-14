@@ -8,7 +8,7 @@
 #include "file_reader.h"
 #include "auxiliary_functions.h"
 
-LoadCmd::LoadCmd(const Parser &params) {
+void LoadCmd::createCMD(const Parser &params) {
     if(!isValid(params)){
         throw std::invalid_argument("INVALID ARGUMENT");
     }

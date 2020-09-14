@@ -8,7 +8,8 @@
 
 class DupCmd: public CreationCmd{
 public:
-    DupCmd(const Parser& params);
+    /*virtual*/ ~DupCmd() {}
+    /*virtual*/ void createCMD(const Parser& params) ;
     /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure ,IWriter& output);
 
 private:

@@ -8,6 +8,8 @@
 
 class ManagementCmd: public ICMD{
 public:
+    /*virtual*/ ~ManagementCmd() {};
+    /*virtual*/ void createCMD(const Parser& params) = 0;
     /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure ,IWriter& output) =0;
 
 private:

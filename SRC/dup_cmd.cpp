@@ -8,7 +8,7 @@
 #include "auxiliary_functions.h"
 
 
-DupCmd::DupCmd(const Parser &params) {
+void DupCmd::createCMD(const Parser &params) {
     if(!isValid(params)){
         throw std::invalid_argument("INVALID ARGUMENT");
     }

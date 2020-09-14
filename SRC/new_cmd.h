@@ -10,7 +10,8 @@
 
 class NewCmd: public CreationCmd{
 public:
-    NewCmd(const Parser& params);
+    /*virtual*/ ~NewCmd() {}
+    /*virtual*/ void createCMD(const Parser& params) ;
     /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure ,IWriter& output);
 
 private:

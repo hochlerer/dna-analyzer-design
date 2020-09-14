@@ -11,6 +11,8 @@
 
 class ICMD{
 public:
+    virtual ~ICMD() = 0;
+    virtual void createCMD(const Parser& params) = 0;
     virtual void run(const Parser& params, StructureDna& dnaStructure ,IWriter& output) = 0;
 
 private:

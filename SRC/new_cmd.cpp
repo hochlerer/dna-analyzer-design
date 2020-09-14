@@ -8,7 +8,7 @@
 #include "structure_dna.h"
 #include "auxiliary_functions.h"
 
-NewCmd::NewCmd(const Parser& params) {
+void NewCmd::createCMD(const Parser& params) {
     if(!isValid(params)){
         throw std::invalid_argument("INVALID ARGUMENT");
     }
@@ -26,7 +26,7 @@ bool NewCmd::isValid(const Parser &params) {
     return true;
 }
 
-void NewCmd::run(const Parser &params, StructureDna& dnaStructure ,IWriter& output) {
+void NewCmd::run(const Parser &params, StructureDna &dnaStructure ,IWriter &output) {
     static size_t countDna = 0;
     std::string dnaName;
     if(params.getParams().size() == 1 ){

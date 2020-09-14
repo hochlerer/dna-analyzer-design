@@ -3,15 +3,12 @@
 //
 
 #include "terminal.h"
-#include "system.h"
-#include "keyboard_reader.h"
 #include "parser.h"
 #include "ICMD.h"
 #include "create_cmd_factory.h"
-#include "screen_writer.h"
-#include "terminal.h"
 
 void Terminal::start(IReader& input, IWriter& output, StructureDna& dnaStructure) {
+
     while (true){
         Parser p;
         input.read();
@@ -23,10 +20,11 @@ void Terminal::start(IReader& input, IWriter& output, StructureDna& dnaStructure
             ICMD *command = CreateCmdFactory::create(p);
             command->run(p, dnaStructure, output);
         }
-        catch (std::invalid_argument e) {
+        catch (std::invalid_argument &e) {
             output.write(e.what());
             output.write("please enter again\n");
         }
     }
+    CreateCmdFactory::release();
 }
 

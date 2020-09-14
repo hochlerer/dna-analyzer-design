@@ -9,7 +9,8 @@
 
 class LoadCmd: public CreationCmd{
 public:
-    LoadCmd(const Parser& params);
+    /*virtual*/ ~LoadCmd() {}
+    /*virtual*/ void createCMD(const Parser& params) ;
     /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure ,IWriter& output);
 
 private:
