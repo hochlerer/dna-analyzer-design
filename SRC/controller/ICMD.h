@@ -6,8 +6,8 @@
 #define DNA_ICMD_H
 #include "parser.h"
 #include <string>
-#include "structure_dna.h"
-#include "IWriter.h"
+#include "../model/structure_dna.h"
+#include "../view/IWriter.h"
 
 class ICMD{
 public:

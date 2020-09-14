@@ -4,7 +4,6 @@
 
 #include "dup_cmd.h"
 #include <sstream>
-#include "structure_dna.h"
 #include "auxiliary_functions.h"
 
 
@@ -61,8 +60,8 @@ void DupCmd::run(const Parser &params, StructureDna& dnaStructure ,IWriter& outp
 void DupCmd::printAfterCommand(StructureDna& dnaStructure ,IWriter& output)const {
     DnaMetaData temp(dnaStructure.findDna(DnaMetaData::getId()));
     std::string strToPrint, idStr;
-    idStr = numTostring(temp.getId().getId());
-    strToPrint = "[" + idStr + "]" + " " + temp.getName().getNameDna() + ": " + temp.getDnaSeq()->getSeq() + "\n";
+    idStr = numTostring(temp.getId());
+    strToPrint = "[" + idStr + "]" + " " + temp.getName() + ": " + temp.getDnaSeq()->getSeq() + "\n";
     output.write(strToPrint.c_str());
 }
 
@@ -71,7 +70,7 @@ void DupCmd::getNameById(const Parser &params, StructureDna& dnaStructure ){
     size_t id = stringToNum(params.getParams()[0].substr(1));
     std::string dnaName, dnaSeq, name;
 
-    name = dnaStructure.findDna(id).getName().getNameDna();
+    name = dnaStructure.findDna(id).getName();
     dnaSeq = dnaStructure.findDna(id).getDnaSeq()->getSeq();
     if(params.getParams().size() == 1 ){
         (dnaStructure.findDna(id)).increaseCounter();

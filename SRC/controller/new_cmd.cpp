@@ -5,7 +5,6 @@
 
 #include <sstream>
 #include "new_cmd.h"
-#include "structure_dna.h"
 #include "auxiliary_functions.h"
 
 void NewCmd::createCMD(const Parser& params) {
@@ -51,8 +50,8 @@ void NewCmd::run(const Parser &params, StructureDna &dnaStructure ,IWriter &outp
 void NewCmd::printAfterCommand(StructureDna& dnaStructure ,IWriter& output)const {
     DnaMetaData temp(dnaStructure.findDna(DnaMetaData::getId()));
     std::string strToPrint, idStr;
-    idStr = numTostring(temp.getId().getId());
-    strToPrint = "[" + idStr + "]" + " " + temp.getName().getNameDna() +": " + temp.getDnaSeq()->getSeq() + "\n";
+    idStr = numTostring(temp.getId());
+    strToPrint = "[" + idStr + "]" + " " + temp.getName() +": " + temp.getDnaSeq()->getSeq() + "\n";
     output.write(strToPrint.c_str());
 }
 

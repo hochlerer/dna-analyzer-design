@@ -11,14 +11,14 @@
 class StructureDna{
 public:
     void addDna(DnaMetaData* dna);
-    DnaMetaData& findDna(NameDna name) ;
-    DnaMetaData& findDna(IdDna id) ;
-    bool isExistDna(NameDna name)const ;
-    bool isExistDna(IdDna id)const ;
+    DnaMetaData& findDna(std::string name) ;
+    DnaMetaData& findDna(size_t id) ;
+    bool isExistDna(std::string name)const ;
+    bool isExistDna(size_t id)const ;
 
 private:
-    std::map<IdDna,DnaMetaData*> m_idStructure;
-    std::map<NameDna, DnaMetaData*> m_nameStructure;
+    std::map<size_t, DnaMetaData*> m_idStructure;
+    std::map<std::string, DnaMetaData*> m_nameStructure;
 };
 
 #endif //DNA_STRUCTURE_DNA_H

@@ -4,9 +4,16 @@
 
 #include "meta_data_dna.h"
 
-IdDna DnaMetaData::m_idDna;
+size_t DnaMetaData::s_idDna;
 
 DnaMetaData::~DnaMetaData() {
-//    delete m_dna;
-//    m_dna = NULL;
+    delete m_dna;
+    m_dna = NULL;
+}
+
+DnaMetaData::DnaMetaData(const DnaMetaData &other) {
+    m_dna = new DnaSequence(*(other.m_dna));
+    m_statusDna = other.m_statusDna;
+    m_nameDna = other.m_nameDna;
+    m_counter = 0;
 }

@@ -8,7 +8,7 @@
 #include <cstring>
 #include <iostream>
 #include "list"
-#include "IReader.h"
+#include "../view/IReader.h"
 
 class DnaSequence{
 private:
@@ -37,6 +37,7 @@ public:
     ~DnaSequence();
     const DnaSequence& operator=(const DnaSequence&);
     Nucleotide& operator[](size_t index);
+
     const char* getSeq()const ;
     size_t getLength()const;
     DnaSequence sliceDna(size_t start, size_t end)const;

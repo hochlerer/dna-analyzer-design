@@ -4,8 +4,7 @@
 
 #include <sstream>
 #include "load_cmd.h"
-#include "structure_dna.h"
-#include "file_reader.h"
+#include "../view/file_reader.h"
 #include "auxiliary_functions.h"
 
 void LoadCmd::createCMD(const Parser &params) {
@@ -61,8 +60,8 @@ void LoadCmd::printAfterCommand(StructureDna& dnaStructure ,IWriter& output) con
         dnaSeq = dnaSeq.substr(0, 31) + "..." + dnaSeq.substr(lngDna-4, lngDna-1);
     }
     std::string strToPrint, idStr;
-    idStr = numTostring(temp.getId().getId());
-    strToPrint = "[" + idStr + "]" + " " + temp.getName().getNameDna() +": " + dnaSeq + "\n";
+    idStr = numTostring(temp.getId());
+    strToPrint = "[" + idStr + "]" + " " + temp.getName() +": " + dnaSeq + "\n";
     output.write(strToPrint.c_str());
 }
 

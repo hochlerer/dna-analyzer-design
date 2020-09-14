@@ -6,12 +6,14 @@
 #define DNA_CREATE_CMD_FACTORY_H
 
 #include <string>
+#include <map>
+
 class Parser;
 class ICMD;
 
 class CreateCmdFactory{
 public:
-    static std::map<std::string, ICMD*> init();
+    static void init();
     static ICMD* create(const Parser& p);
     static void release();
 

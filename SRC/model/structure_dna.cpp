@@ -5,23 +5,23 @@
 #include "structure_dna.h"
 
 void StructureDna::addDna(DnaMetaData* dna) {
-    m_idStructure.insert(std::pair<IdDna, DnaMetaData*> (dna->getId(), dna));
-    m_nameStructure.insert(std::pair<NameDna,DnaMetaData*> (dna->getName(), dna));
+    m_idStructure.insert(std::pair<size_t, DnaMetaData*> (dna->getId(), dna));
+    m_nameStructure.insert(std::pair<std::string,DnaMetaData*> (dna->getName(), dna));
 }
 
-bool StructureDna::isExistDna(NameDna name) const {
+bool StructureDna::isExistDna(std::string name) const {
     return m_nameStructure.find(name) != m_nameStructure.end();
 }
 
-bool StructureDna::isExistDna(IdDna id) const {
+bool StructureDna::isExistDna(size_t id) const {
     return m_idStructure.find(id) != m_idStructure.end();
 }
 
-DnaMetaData& StructureDna::findDna(NameDna name) {
+DnaMetaData& StructureDna::findDna(std::string name) {
     return *(m_nameStructure.find(name)->second);
 }
 
-DnaMetaData &StructureDna::findDna(IdDna id) {
+DnaMetaData &StructureDna::findDna(size_t id) {
     return *(m_idStructure.find(id)->second);
 }
 
