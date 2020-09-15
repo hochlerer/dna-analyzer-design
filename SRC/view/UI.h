@@ -7,6 +7,7 @@
 
 #include "IReader.h"
 #include "IWriter.h"
+
 class StructureDna;
 
 class UI{

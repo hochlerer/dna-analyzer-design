@@ -4,8 +4,11 @@
 
 #ifndef DNA_KEYBOARD_READER_H
 #define DNA_KEYBOARD_READER_H
-#include "IReader.h"
+
 #include <string>
+
+#include "IReader.h"
+
 
 class KeyboardReader: public IReader{
 public:

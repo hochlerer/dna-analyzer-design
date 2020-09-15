@@ -4,9 +4,11 @@
 
 #ifndef DNA_SYSTEM_H
 #define DNA_SYSTEM_H
+
+class UI;
 class IReader;
 class IWriter;
-class UI;
+
 
 class System{
 public:

@@ -11,6 +11,7 @@
 class StructureDna{
 public:
     void addDna(DnaMetaData* dna);
+    void erase(size_t id, std::string name);
     DnaMetaData& findDna(std::string name) ;
     DnaMetaData& findDna(size_t id) ;
     bool isExistDna(std::string name)const ;

@@ -14,13 +14,16 @@ void Terminal::start(IReader& input, IWriter& output, StructureDna& dnaStructure
         Parser p;
         input.read();
         p.parseCmd(input.getStr());
+
         if (p.getCmdName() == "quit") {
             break;
         }
+
         try {
             ICMD *command = CreateCmdFactory::create(p);
-            command->run(p, dnaStructure, output);
+            command->run(p, dnaStructure, input, output);
         }
+
         catch (std::exception &e) {
             output.write(e.what());
             output.write("please enter again\n");

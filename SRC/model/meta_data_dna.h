@@ -15,6 +15,7 @@ public:
     DnaMetaData(const DnaMetaData& other);
     ~DnaMetaData();
     static size_t getId() {return s_idDna;}
+
     std::string getName()const {return m_nameDna;}
     std::string getStatus()const {return m_statusDna;}
     const DnaSequence* getDnaSeq()const {return m_dna;}
@@ -22,10 +23,10 @@ public:
     void increaseCounter(){++m_counter;}
 
 private:
+    static size_t s_idDna;
     DnaSequence* m_dna;
     std::string m_nameDna;
     std::string m_statusDna;
-    static size_t s_idDna;
     size_t m_counter;
 };
 

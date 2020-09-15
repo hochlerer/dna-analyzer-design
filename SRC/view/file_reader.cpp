@@ -1,8 +1,10 @@
 //
 // Created by y on 6/30/20.
 //
+
 #include <fstream>
 #include <sstream>
+
 #include "file_reader.h"
 
 
@@ -20,11 +22,13 @@ std::string FileReader::getFileName() const {
     size_t index;
     std::string splitName = m_filePath;
     index = splitName.find('/');
+
     while (std::string::npos != index){
         splitName = splitName.substr(index+1);
         index = splitName.find('/');
     }
     splitName = splitName.substr(0,splitName.find('.'));
+
     return splitName;
 }
 

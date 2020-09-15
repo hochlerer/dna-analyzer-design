@@ -2,8 +2,10 @@
 // Created by y on 6/30/20.
 //
 
-#include "screen_writer.h"
 #include <iostream>
+
+#include "screen_writer.h"
+
 
 void ScreenWriter::write(const char *str) const {
     std::cout<< "<<< ";

@@ -4,6 +4,7 @@
 
 #ifndef DNA_SCREEN_WRITER_H
 #define DNA_SCREEN_WRITER_H
+
 #include "IWriter.h"
 
 class ScreenWriter: public IWriter{

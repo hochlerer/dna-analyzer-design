@@ -4,8 +4,11 @@
 
 #ifndef DNA_FILE_WRITER_H
 #define DNA_FILE_WRITER_H
-#include "IWriter.h"
+
 #include <string>
+
+#include "IWriter.h"
+
 
 class FileWriter: public IWriter{
 public:

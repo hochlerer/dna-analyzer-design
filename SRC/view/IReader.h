@@ -4,6 +4,7 @@
 
 #ifndef DNA_IREADER_H
 #define DNA_IREADER_H
+
 #include <string>
 
 class IReader{

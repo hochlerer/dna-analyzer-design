@@ -4,6 +4,7 @@
 
 #ifndef DNA_PARSER_H
 #define DNA_PARSER_H
+
 #include <string>
 #include <vector>
 
