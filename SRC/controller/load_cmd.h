@@ -11,7 +11,7 @@ class LoadCmd: public CreationCmd{
 public:
     /*virtual*/ ~LoadCmd() {}
     /*virtual*/ void createCMD(const Parser& params) ;
-    /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure ,IWriter& output);
+    /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure , IReader& input ,IWriter& output);
 
 private:
     void printAfterCommand(StructureDna& dnaStructure ,IWriter& output)const ;

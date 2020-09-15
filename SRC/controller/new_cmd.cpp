@@ -4,41 +4,54 @@
 
 
 #include <sstream>
+
 #include "new_cmd.h"
 #include "auxiliary_functions.h"
 
 void NewCmd::createCMD(const Parser& params) {
-    if(!isValid(params)){
+
+    if (!isValid(params)){
         throw std::invalid_argument("INVALID ARGUMENT");
     }
 }
 
 bool NewCmd::isValid(const Parser &params) {
-    if(params.getParams().size() < 1 || params.getParams().size() > 2){
+
+    if (params.getParams().size() < 1 || params.getParams().size() > 2){
+
         return false;
     }
-    if(params.getParams().size() == 2){
-        if(params.getParams()[1][0] != '@'){
+
+    if (params.getParams().size() == 2){
+
+        if (params.getParams()[1][0] != '@'){
+
             return false;
         }
     }
+
     return true;
 }
 
-void NewCmd::run(const Parser &params, StructureDna &dnaStructure ,IWriter &output) {
+void NewCmd::run(const Parser &params, StructureDna &dnaStructure , IReader& input, IWriter &output) {
     static size_t countDna = 0;
     std::string dnaName;
-    if(params.getParams().size() == 1 ){
+
+    if (params.getParams().size() == 1 ){
         dnaName = "seq" + numTostring(++countDna);
+
         while (dnaStructure.isExistDna(dnaName)) {
             dnaName = "seq" + numTostring(++countDna);
         }
     }
+
     else {
         dnaName = params.getParams()[1].substr(1);
     }
-    if(dnaStructure.isExistDna(dnaName)){
-        output.write("this name is already exist. please enter again\n");
+
+    if (dnaStructure.isExistDna(dnaName)){
+        output.write("This name is already exist. please enter again\n");
+
         return;
     }
 

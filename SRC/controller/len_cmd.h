@@ -11,7 +11,7 @@ class LenCmd: public AnalysisCmd{
 public:
     /*virtual*/ ~LenCmd(){};
     /*virtual*/ void createCMD(const Parser& params);
-    /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure ,IWriter& output);
+    /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure ,IReader& input ,IWriter& output);
 
 private:
     void printAfterCommand(size_t len ,IWriter& output)const ;

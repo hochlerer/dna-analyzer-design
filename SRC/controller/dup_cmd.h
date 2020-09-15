@@ -4,13 +4,14 @@
 
 #ifndef DNA_DUP_CMD_H
 #define DNA_DUP_CMD_H
+
 #include "creation_command.h"
 
 class DupCmd: public CreationCmd{
 public:
     /*virtual*/ ~DupCmd() {}
     /*virtual*/ void createCMD(const Parser& params) ;
-    /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure ,IWriter& output);
+    /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure ,IReader& input ,IWriter& output);
 
 private:
     void printAfterCommand(StructureDna& dnaStructure ,IWriter& output)const ;
