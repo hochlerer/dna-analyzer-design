@@ -75,6 +75,7 @@ bool DelCmd::isConfirm(StructureDna &dnaStructure, IReader &input, IWriter &outp
     std::string print = "Do you really want to delete " + name + " : " + tempDna.getDnaSeq()->getSeq() + " ?\n" +
                         "Please confirm by 'y' or 'Y', or cancel by 'n' or 'N'.";
     output.write(print.c_str());
+    output.write("> confirm >>> ");
     input.read();
     isConfirmed = input.getStr();
 

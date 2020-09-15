@@ -12,6 +12,7 @@ void Terminal::start(IReader& input, IWriter& output, StructureDna& dnaStructure
 
     while (true){
         Parser p;
+        output.write("> cmd >>> ");
         input.read();
         p.parseCmd(input.getStr());
 

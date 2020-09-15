@@ -8,6 +8,5 @@
 
 
 void ScreenWriter::write(const char *str) const {
-    std::cout<< "<<< ";
-    std::cout<< str<< std::endl;
+    std::cout<< str;
 }
