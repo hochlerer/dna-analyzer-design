@@ -7,6 +7,7 @@
 std::string numTostring(size_t num){
     std::stringstream str;
     str<< num;
+
     return str.str();
 }
 
@@ -14,5 +15,6 @@ size_t stringToNum(std::string str){
     std::istringstream st(str);
     size_t num;
     st>> num;
+
     return num;
 }
