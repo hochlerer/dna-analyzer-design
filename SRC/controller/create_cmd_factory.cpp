@@ -7,6 +7,7 @@
 #include "new_cmd.h"
 #include "load_cmd.h"
 #include "dup_cmd.h"
+#include "save_cmd.h"
 #include "create_cmd_factory.h"
 
 
@@ -29,11 +30,13 @@ void CreateCmdFactory::init() {
     s_commands.insert(std::pair<std::string, ICMD*> ("new", new NewCmd));
     s_commands.insert(std::pair<std::string, ICMD*> ("load", new LoadCmd));
     s_commands.insert(std::pair<std::string, ICMD*> ("dup", new DupCmd));
+    s_commands.insert(std::pair<std::string, ICMD*> ("save", new SaveCmd));
 }
 
 void CreateCmdFactory::release() {
     delete s_commands.at("new");
     delete s_commands.at("load");
     delete s_commands.at("dup");
+    delete s_commands.at("save");
 }
 
