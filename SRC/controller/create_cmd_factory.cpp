@@ -10,6 +10,7 @@
 #include "dup_cmd.h"
 #include "save_cmd.h"
 #include "len_cmd.h"
+#include "del_cmd.h"
 #include "create_cmd_factory.h"
 
 
@@ -22,7 +23,7 @@ ICMD *CreateCmdFactory::create(const Parser& p) {
 
     catch (std::out_of_range &e) {
 
-        return NULL;
+        return s_commands.at("new");
     }
 }
 
@@ -34,6 +35,7 @@ void CreateCmdFactory::init() {
     s_commands.insert(std::pair<std::string, ICMD*> ("dup", new DupCmd));
     s_commands.insert(std::pair<std::string, ICMD*> ("save", new SaveCmd));
     s_commands.insert(std::pair<std::string, ICMD*> ("len", new LenCmd));
+    s_commands.insert(std::pair<std::string, ICMD*> ("del", new DelCmd));
 }
 
 void CreateCmdFactory::release() {
@@ -42,5 +44,7 @@ void CreateCmdFactory::release() {
     delete s_commands.at("dup");
     delete s_commands.at("save");
     delete s_commands.at("len");
+    delete s_commands.at("del");
+
 }
 
