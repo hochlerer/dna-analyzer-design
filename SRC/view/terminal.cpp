@@ -21,7 +21,7 @@ void Terminal::start(IReader& input, IWriter& output, StructureDna& dnaStructure
             ICMD *command = CreateCmdFactory::create(p);
             command->run(p, dnaStructure, output);
         }
-        catch (std::invalid_argument &e) {
+        catch (std::exception &e) {
             output.write(e.what());
             output.write("please enter again\n");
         }

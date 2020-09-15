@@ -28,12 +28,12 @@ bool LoadCmd::isValid(const Parser &params) {
 
 void LoadCmd::run(const Parser &params, StructureDna& dnaStructure ,IWriter& output) {
     std::string dnaName, dnaSeq, fileName = params.getParams()[0];
-    FileReader file(fileName.c_str());
+    FileReader file(fileName);
     file.read();
+    fileName = file.getFileName();
     dnaSeq = file.getStr();
-
     if(params.getParams().size() == 1 ){
-        dnaName = fileName ;
+        dnaName = fileName;
         while (dnaStructure.isExistDna(dnaName)) {
             dnaStructure.findDna(dnaName).increaseCounter();
             dnaName = fileName + "_" + numTostring(dnaStructure.findDna(dnaName).getCounter());

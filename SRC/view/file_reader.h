@@ -9,12 +9,13 @@
 
 class FileReader: public IReader{
 public:
-    FileReader(const char* fileName):m_fileName(fileName){}
+    FileReader(std::string fileName): m_filePath(fileName){}
     /*virtual*/ void read();
     /*virtual*/ const std::string& getStr()const{return m_strFile;};
+    std::string getFileName()const ;
 
 private:
-    const char* m_fileName;
+    std::string m_filePath;
     std::string m_strFile;
 };
 
