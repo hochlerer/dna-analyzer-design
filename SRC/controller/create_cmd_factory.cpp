@@ -13,6 +13,7 @@
 #include "del_cmd.h"
 #include "rename_cmd.h"
 #include "find_cmd.h"
+#include "count_cmd.h"
 #include "create_cmd_factory.h"
 
 
@@ -40,6 +41,7 @@ void CreateCmdFactory::init() {
     s_commands.insert(std::pair<std::string, ICMD*> ("del", new DelCmd));
     s_commands.insert(std::pair<std::string, ICMD*> ("rename", new RenameCmd));
     s_commands.insert(std::pair<std::string, ICMD*> ("find", new FindCmd));
+    s_commands.insert(std::pair<std::string, ICMD*> ("count", new CountCmd));
 }
 
 void CreateCmdFactory::release() {
@@ -51,6 +53,6 @@ void CreateCmdFactory::release() {
     delete s_commands.at("del");
     delete s_commands.at("rename");
     delete s_commands.at("find");
-
+    delete s_commands.at("count");
 }
 
