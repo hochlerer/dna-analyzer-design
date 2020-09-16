@@ -17,3 +17,7 @@ DnaMetaData::DnaMetaData(const DnaMetaData &other) {
     m_nameDna = other.m_nameDna;
     m_counter = 0;
 }
+
+void DnaMetaData::setName(std::string newName) {
+    m_nameDna = newName;
+}

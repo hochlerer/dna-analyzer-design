@@ -17,6 +17,7 @@ public:
     static size_t getId() {return s_idDna;}
 
     std::string getName()const {return m_nameDna;}
+    void setName(std::string newName);
     std::string getStatus()const {return m_statusDna;}
     const DnaSequence* getDnaSeq()const {return m_dna;}
     size_t getCounter()const {return m_counter;}

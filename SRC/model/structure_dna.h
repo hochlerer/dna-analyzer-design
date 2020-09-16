@@ -16,6 +16,7 @@ public:
     DnaMetaData& findDna(size_t id) ;
     bool isExistDna(std::string name)const ;
     bool isExistDna(size_t id)const ;
+    void setDnaName(std::string currName, std::string newName);
 
 private:
     std::map<size_t, DnaMetaData*> m_idStructure;

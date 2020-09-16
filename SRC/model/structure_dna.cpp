@@ -34,3 +34,12 @@ bool StructureDna::isExistDna(size_t id) const {
     return m_idStructure.find(id) != m_idStructure.end();
 }
 
+void StructureDna::setDnaName(std::string currName, std::string newName) {
+    DnaMetaData* tempDna = m_nameStructure.find(currName)->second;
+    size_t id = tempDna->getId();
+    m_idStructure.find(id)->second->setName(newName);
+    m_nameStructure.insert(std::pair<std::string,DnaMetaData*> (newName, tempDna));
+    tempDna = NULL;
+    m_nameStructure.erase(currName);
+}
+
