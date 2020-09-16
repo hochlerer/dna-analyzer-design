@@ -36,31 +36,42 @@ bool SaveCmd::isValid(const Parser &params) {
     return true;
 }
 
-void SaveCmd::run(const Parser &params, StructureDna &dnaStructure, IReader& input, IWriter &output) {
-    size_t id;
-    std::string dnaName, fileName, rawdnaPath = "model/rawdna_files/";
+size_t SaveCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWriter &output){
+    std::string dnaName;
+    size_t dnaId;
 
-    if (params.getParams()[0][0] == '@'){
-        dnaName = params.getParams()[0].substr(1);
+    if (dna[0] == '@'){
+        dnaName = dna.substr(1);
 
         if (!dnaStructure.isExistDna(dnaName)){
             output.write("Name not exist. please enter again\n");
 
-            return;
+            return 0;
         }
-        id = dnaStructure.findDna(dnaName).getId();
+        dnaId = dnaStructure.findDna(dnaName).getId();
     }
 
     else{
-        id = stringToNum(params.getParams()[0].substr(1));
+        dnaId = stringToNum(dna.substr(1));
 
-        if (!dnaStructure.isExistDna(id)){
+        if (!dnaStructure.isExistDna(dnaId)){
             output.write("Id not exist. please enter again\n");
 
-            return;
+            return 0;
         }
-        dnaName = dnaStructure.findDna(id).getName();
     }
+
+    return dnaId;
+}
+
+void SaveCmd::run(const Parser &params, StructureDna &dnaStructure, IReader& input, IWriter &output) {
+    size_t id = getDnaId(params.getParams()[0], dnaStructure, output);
+
+    if (0 == id){
+
+        return;
+    }
+    std::string dnaName = dnaStructure.findDna(id).getName(), fileName, rawdnaPath = "model/rawdna_files/";
 
     if (2 == params.getParams().size()){
         fileName = params.getParams()[1].substr(1);

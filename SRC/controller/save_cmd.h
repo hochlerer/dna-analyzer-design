@@ -15,6 +15,7 @@ public:
 
 private:
     bool isValid(const Parser& params);
+    size_t getDnaId(const std::string &dna, StructureDna &dnaStructure, IWriter &output);
 };
 
 #endif //DNA_SAVE_CMD_H

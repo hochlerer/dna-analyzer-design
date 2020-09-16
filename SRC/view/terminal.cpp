@@ -27,7 +27,7 @@ void Terminal::start(IReader& input, IWriter& output, StructureDna& dnaStructure
 
         catch (std::exception &e) {
             output.write(e.what());
-            output.write("please enter again\n");
+            output.write("\nplease enter again\n");
         }
     }
     CreateCmdFactory::release();

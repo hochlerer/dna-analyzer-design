@@ -16,8 +16,8 @@ public:
 private:
     void printAfterCommand(StructureDna& dnaStructure ,IWriter& output)const ;
     bool isValid(const Parser& params);
-    void getNameById(const Parser &params, StructureDna& dnaStructure);
-    void getNameByName(const Parser &params, StructureDna& dnaStructure );
-    };
+    size_t getDnaId(const std::string &dna, StructureDna &dnaStructure, IWriter &output);
+    std::string getNameById(size_t id, StructureDna& dnaStructure);
+};
 
 #endif //DNA_DUP_CMD_H

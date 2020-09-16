@@ -16,6 +16,7 @@ public:
 private:
     void printAfterCommand(IWriter &output, bool isDeleted, size_t id, std::string name, std::string seq)const ;
     bool isValid(const Parser& params);
+    size_t getDnaId(const std::string &dna, StructureDna &dnaStructure, IWriter &output);
     bool isConfirm(StructureDna &dnaStructure, IReader &input, IWriter &output, size_t id);
     bool isValidConfirm(std::string conf);
 };
