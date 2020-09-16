@@ -16,6 +16,8 @@ public:
 private:
     void printAfterCommand(size_t len ,IWriter& output)const ;
     bool isValid(const Parser& params);
+    size_t getDnaId(const std::string &dna, StructureDna &dnaStructure, IWriter &output);
+
 };
 
 #endif //DNA_LEN_CMD_H
