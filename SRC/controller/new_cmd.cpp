@@ -61,7 +61,7 @@ void NewCmd::run(const Parser &params, StructureDna &dnaStructure , IReader& inp
 }
 
 void NewCmd::printAfterCommand(StructureDna& dnaStructure ,IWriter& output)const {
-    DnaMetaData temp(dnaStructure.findDna(DnaMetaData::getId()));
+    DnaMetaData temp(dnaStructure.findDna(DnaMetaData::getLastId()-1));
     std::string strToPrint, idStr;
     idStr = numTostring(temp.getId());
     strToPrint = "[" + idStr + "]" + " " + temp.getName() +": " + temp.getDnaSeq()->getSeq() + "\n";

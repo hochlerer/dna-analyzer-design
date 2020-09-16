@@ -66,7 +66,7 @@ void LoadCmd::run(const Parser &params, StructureDna& dnaStructure , IReader& in
 }
 
 void LoadCmd::printAfterCommand(StructureDna& dnaStructure ,IWriter& output) const {
-    DnaMetaData temp(dnaStructure.findDna(DnaMetaData::getId()));
+    DnaMetaData temp(dnaStructure.findDna(DnaMetaData::getLastId()-1));
     std::string dnaSeq = temp.getDnaSeq()->getSeq();
     size_t lngDna  = dnaSeq.size();
 

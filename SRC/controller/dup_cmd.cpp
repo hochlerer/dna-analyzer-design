@@ -95,7 +95,7 @@ void DupCmd::run(const Parser &params, StructureDna& dnaStructure ,IReader& inpu
 }
 
 void DupCmd::printAfterCommand(StructureDna& dnaStructure ,IWriter& output)const {
-    DnaMetaData temp(dnaStructure.findDna(DnaMetaData::getId()));
+    DnaMetaData temp(dnaStructure.findDna(DnaMetaData::getLastId()));
     std::string strToPrint, idStr;
     idStr = numTostring(temp.getId());
     strToPrint = "[" + idStr + "]" + " " + temp.getName() + ": " + temp.getDnaSeq()->getSeq() + "\n";

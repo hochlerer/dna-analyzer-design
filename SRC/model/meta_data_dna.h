@@ -10,12 +10,13 @@
 class DnaMetaData{
 public:
     DnaMetaData(const DnaSequence& dnaSeq, const std::string& name, const std::string& status):
-                m_dna(new DnaSequence(dnaSeq)), m_nameDna(name), m_statusDna(status) , m_counter(0){++s_idDna;}
+                m_dna(new DnaSequence(dnaSeq)), m_idDna(s_lastId), m_nameDna(name), m_statusDna(status) , m_counter(0){++s_lastId;}
 
     DnaMetaData(const DnaMetaData& other);
     ~DnaMetaData();
-    static size_t getId() {return s_idDna;}
+    static size_t getLastId() {return s_lastId;}
 
+    size_t getId()const {return m_idDna;}
     std::string getName()const {return m_nameDna;}
     void setName(std::string newName);
     std::string getStatus()const {return m_statusDna;}
@@ -24,7 +25,8 @@ public:
     void increaseCounter(){++m_counter;}
 
 private:
-    static size_t s_idDna;
+    static size_t s_lastId;
+    size_t m_idDna;
     DnaSequence* m_dna;
     std::string m_nameDna;
     std::string m_statusDna;
