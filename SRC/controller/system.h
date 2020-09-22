@@ -8,11 +8,13 @@
 class UI;
 class IReader;
 class IWriter;
-
+class Parser;
+class StructureDna;
 
 class System{
 public:
-    void startApp(UI& ui, IReader& input, IWriter& output);
+    void startApp(UI &ui, IReader &input, IWriter &output);
+    void execCmd(Parser &p, StructureDna &dnaStructure, IReader &input, IWriter &output);
 
 private:
 };

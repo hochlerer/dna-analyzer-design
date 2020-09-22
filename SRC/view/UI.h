@@ -4,15 +4,18 @@
 
 #ifndef DNA_UI_H
 #define DNA_UI_H
+#include "../controller/callback.h"
 
-#include "IReader.h"
-#include "IWriter.h"
-
+class IReader;
+class IWriter;
+class System;
 class StructureDna;
+
+
 
 class UI{
 public:
-    virtual void start(IReader& input, IWriter& output, StructureDna& dnaStructure) = 0;
+    virtual void start(Callback<System> &callback, IReader& input, IWriter& output, StructureDna& dnaStructure) = 0;
 };
 
 #endif //DNA_UI_H

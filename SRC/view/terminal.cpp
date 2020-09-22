@@ -3,11 +3,14 @@
 //
 
 #include "terminal.h"
+#include "../controller/system.h"
 #include "../controller/parser.h"
-#include "../controller/ICMD.h"
 #include "../controller/create_cmd_factory.h"
+#include "IWriter.h"
+#include "IReader.h"
 
-void Terminal::start(IReader& input, IWriter& output, StructureDna& dnaStructure) {
+
+void Terminal::start(Callback<System> &callback, IReader &input, IWriter &output, StructureDna &dnaStructure) {
     CreateCmdFactory::init();
 
     while (true){
@@ -21,8 +24,7 @@ void Terminal::start(IReader& input, IWriter& output, StructureDna& dnaStructure
         }
 
         try {
-            ICMD *command = CreateCmdFactory::create(p);
-            command->run(p, dnaStructure, input, output);
+            callback(p, dnaStructure, input, output);
         }
 
         catch (std::exception &e) {
