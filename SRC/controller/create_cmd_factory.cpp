@@ -5,6 +5,7 @@
 #include <stdexcept>
 
 #include "creation_command.h"
+#include "empty_cmd.h"
 #include "new_cmd.h"
 #include "load_cmd.h"
 #include "dup_cmd.h"
@@ -14,6 +15,7 @@
 #include "rename_cmd.h"
 #include "find_cmd.h"
 #include "count_cmd.h"
+#include "findall_cmd.h"
 #include "create_cmd_factory.h"
 
 
@@ -26,13 +28,16 @@ ICMD *CreateCmdFactory::create(const Parser& p) {
 
     catch (std::out_of_range &e) {
 
-        return s_commands.at("new");
+        s_commands.at("empty")->createCMD(p);
+
+        return s_commands.at("empty");
     }
 }
 
 std::map<std::string, ICMD*> CreateCmdFactory::s_commands;
 
 void CreateCmdFactory::init() {
+    s_commands.insert(std::pair<std::string, ICMD*> ("empty", new EmptyCmd));
     s_commands.insert(std::pair<std::string, ICMD*> ("new", new NewCmd));
     s_commands.insert(std::pair<std::string, ICMD*> ("load", new LoadCmd));
     s_commands.insert(std::pair<std::string, ICMD*> ("dup", new DupCmd));
@@ -42,9 +47,11 @@ void CreateCmdFactory::init() {
     s_commands.insert(std::pair<std::string, ICMD*> ("rename", new RenameCmd));
     s_commands.insert(std::pair<std::string, ICMD*> ("find", new FindCmd));
     s_commands.insert(std::pair<std::string, ICMD*> ("count", new CountCmd));
+    s_commands.insert(std::pair<std::string, ICMD*> ("findall", new FindallCmd));
 }
 
 void CreateCmdFactory::release() {
+    delete s_commands.at("empty");
     delete s_commands.at("new");
     delete s_commands.at("load");
     delete s_commands.at("dup");
@@ -54,5 +61,6 @@ void CreateCmdFactory::release() {
     delete s_commands.at("rename");
     delete s_commands.at("find");
     delete s_commands.at("count");
+    delete s_commands.at("findall");
 }
 

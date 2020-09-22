@@ -5,7 +5,6 @@
 #ifndef DNA_CREATE_CMD_FACTORY_H
 #define DNA_CREATE_CMD_FACTORY_H
 
-#include <string>
 #include <map>
 
 class Parser;
