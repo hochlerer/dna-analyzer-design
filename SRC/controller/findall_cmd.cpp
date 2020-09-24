@@ -27,7 +27,7 @@ bool FindallCmd::isValid(const Parser &params) {
     return true;
 }
 
-size_t FindallCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWriter &output) {
+size_t FindallCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IOCallback<UI>& ioCallback) {
     std::string dnaName;
     size_t dnaId;
 
@@ -35,7 +35,7 @@ size_t FindallCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, 
         dnaName = dna.substr(1);
 
         if (!dnaStructure.isExistDna(dnaName)){
-            output.write("Name not exist. please enter again\n");
+            ioCallback.runWrite("Name not exist. please enter again\n");
 
             return 0;
         }
@@ -46,7 +46,7 @@ size_t FindallCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, 
         dnaId = stringToNum(dna.substr(1));
 
         if (!dnaStructure.isExistDna(dnaId)){
-            output.write("Id not exist. please enter again\n");
+            ioCallback.runWrite("Id not exist. please enter again\n");
 
             return 0;
         }
@@ -56,8 +56,8 @@ size_t FindallCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, 
 }
 
 
-void FindallCmd::run(const Parser &params, StructureDna &dnaStructure , IReader& input , IWriter &output) {
-    size_t id = getDnaId(params.getParams()[0], dnaStructure, output), subId;
+void FindallCmd::run(const Parser &params, StructureDna &dnaStructure , IOCallback<UI>& ioCallback) {
+    size_t id = getDnaId(params.getParams()[0], dnaStructure, ioCallback), subId;
 
     if (0 == id){
 
@@ -66,7 +66,7 @@ void FindallCmd::run(const Parser &params, StructureDna &dnaStructure , IReader&
     std::string subDna = params.getParams()[1];
 
     if ('@' == subDna[0] || '#' == subDna[0]){
-        subId = getDnaId(subDna, dnaStructure, output);
+        subId = getDnaId(subDna, dnaStructure, ioCallback);
 
         if (0 == subId){
 
@@ -79,15 +79,15 @@ void FindallCmd::run(const Parser &params, StructureDna &dnaStructure , IReader&
     std::list<size_t> indexes = originalDna->findAllSubDna(subDna);
 
     if (indexes.empty()){
-        output.write((subDna + " is not a substring of " + originalDna->getSeq() + "\n").c_str());
+        ioCallback.runWrite((subDna + " is not a substring of " + originalDna->getSeq() + "\n").c_str());
     }
 
     else {
-        printAfterCommand(indexes, output);
+        printAfterCommand(indexes, ioCallback);
     }
 }
 
-void FindallCmd::printAfterCommand(std::list<size_t> indexes, IWriter &output) const {
+void FindallCmd::printAfterCommand(std::list<size_t> indexes, IOCallback<UI>& ioCallback) const {
     std::string string = "";
 
     while (!indexes.empty()){
@@ -95,5 +95,5 @@ void FindallCmd::printAfterCommand(std::list<size_t> indexes, IWriter &output) c
         indexes.pop_front();
     }
 
-    output.write((string + "\n").c_str());
+    ioCallback.runWrite((string + "\n").c_str());
 }

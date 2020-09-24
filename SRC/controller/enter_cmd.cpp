@@ -6,4 +6,4 @@
 
 void EnterCmd::createCMD(const Parser& params) {}
 
-void EnterCmd::run(const Parser &params, StructureDna &dnaStructure, IReader &input, IWriter &output) {}
+void EnterCmd::run(const Parser &params, StructureDna &dnaStructure, IOCallback<UI>& ioCallback) {}

@@ -8,6 +8,7 @@
 #include "new_cmd.h"
 #include "auxiliary_functions.h"
 
+
 void NewCmd::createCMD(const Parser& params) {
 
     if (!isValid(params)){
@@ -33,7 +34,7 @@ bool NewCmd::isValid(const Parser &params) {
     return true;
 }
 
-void NewCmd::run(const Parser &params, StructureDna &dnaStructure , IReader& input, IWriter &output) {
+void NewCmd::run(const Parser &params, StructureDna &dnaStructure , IOCallback<UI> &ioCallback) {
     static size_t countDna = 0;
     std::string dnaName;
 
@@ -50,22 +51,22 @@ void NewCmd::run(const Parser &params, StructureDna &dnaStructure , IReader& inp
     }
 
     if (dnaStructure.isExistDna(dnaName)){
-        output.write("This name is already exist. please enter again\n");
+        ioCallback.runWrite("This name is already exist. please enter again\n");
 
         return;
     }
 
     DnaMetaData* newDna = new DnaMetaData(params.getParams()[0], dnaName, (std::string)"new");
     dnaStructure.addDna(newDna);
-    printAfterCommand(dnaStructure, output);
+    printAfterCommand(dnaStructure, ioCallback);
 }
 
-void NewCmd::printAfterCommand(StructureDna& dnaStructure ,IWriter& output)const {
-    DnaMetaData temp(dnaStructure.findDna(DnaMetaData::getLastId()-1));
+void NewCmd::printAfterCommand(StructureDna& dnaStructure ,IOCallback<UI> &ioCallback)const {
+    DnaMetaData temp(dnaStructure.findDna(DnaMetaData::getLastId()));
     std::string strToPrint, idStr;
     idStr = numTostring(temp.getId());
     strToPrint = "[" + idStr + "]" + " " + temp.getName() +": " + temp.getDnaSeq()->getSeq() + "\n";
-    output.write(strToPrint.c_str());
+    ioCallback.runWrite(strToPrint.c_str());
 }
 
 

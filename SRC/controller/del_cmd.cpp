@@ -29,7 +29,7 @@ bool DelCmd::isValid(const Parser &params) {
     return true;
 }
 
-size_t DelCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWriter &output) {
+size_t DelCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IOCallback<UI>& ioCallback) {
     std::string dnaName;
     size_t dnaId;
 
@@ -37,7 +37,7 @@ size_t DelCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWri
         dnaName = dna.substr(1);
 
         if (!dnaStructure.isExistDna(dnaName)){
-            output.write("Name not exist. please enter again\n");
+            ioCallback.runWrite("Name not exist. please enter again\n");
 
             return 0;
         }
@@ -48,7 +48,7 @@ size_t DelCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWri
         dnaId = stringToNum(dna.substr(1));
 
         if (!dnaStructure.isExistDna(dnaId)){
-            output.write("Id not exist. please enter again\n");
+            ioCallback.runWrite("Id not exist. please enter again\n");
 
             return 0;
         }
@@ -58,43 +58,41 @@ size_t DelCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWri
 }
 
 
-void DelCmd::run(const Parser &params, StructureDna &dnaStructure, IReader &input, IWriter &output) {
-    size_t id = getDnaId(params.getParams()[0], dnaStructure, output);
+void DelCmd::run(const Parser &params, StructureDna &dnaStructure, IOCallback<UI>& ioCallback) {
+    size_t id = getDnaId(params.getParams()[0], dnaStructure, ioCallback);
 
     if (0 == id){
 
         return;
     }
     std::string dnaName = dnaStructure.findDna(id).getName();
-    bool isDeleted = isConfirm(dnaStructure, input, output, id);
+    bool isDeleted = isConfirm(dnaStructure, ioCallback, id);
     std::string seq = dnaStructure.findDna(id).getDnaSeq()->getSeq();
 
     if (isDeleted){
         dnaStructure.erase(id, dnaName);
-        printAfterCommand(output, isDeleted, id, dnaName, seq);
+        printAfterCommand(ioCallback, isDeleted, id, dnaName, seq);
     }
 
     else {
-        printAfterCommand(output, isDeleted, id, dnaName, seq);
+        printAfterCommand(ioCallback, isDeleted, id, dnaName, seq);
     }
 
 }
 
-bool DelCmd::isConfirm(StructureDna &dnaStructure, IReader &input, IWriter &output, size_t id) {
+bool DelCmd::isConfirm(StructureDna &dnaStructure, IOCallback<UI>& ioCallback, size_t id) {
     DnaMetaData tempDna(dnaStructure.findDna(id));
     std::string name = tempDna.getName(), isConfirmed;
     std::string print = "Do you really want to delete " + name + " : " + tempDna.getDnaSeq()->getSeq() + " ?\n" +
                         "Please confirm by 'y' or 'Y', or cancel by 'n' or 'N'.";
-    output.write(print.c_str());
-    output.write("> confirm >>> ");
-    input.read();
-    isConfirmed = input.getStr();
+    ioCallback.runWrite(print.c_str());
+    ioCallback.runWrite("> confirm >>> ");
+    isConfirmed = ioCallback.runRead();
 
     while (!isValidConfirm(isConfirmed)){
         print = "You have typed an invalid response. Please either confirm by 'y'/'Y', or cancel by 'n'/'N'.";
-        output.write(print.c_str());
-        input.read();
-        isConfirmed = input.getStr();
+        ioCallback.runWrite(print.c_str());
+        isConfirmed = ioCallback.runRead();
     }
 
     return "Y" == isConfirmed || "y" == isConfirmed;
@@ -102,17 +100,17 @@ bool DelCmd::isConfirm(StructureDna &dnaStructure, IReader &input, IWriter &outp
 }
 
 
-void DelCmd::printAfterCommand(IWriter &output, bool isDeleted, size_t id, std::string name, std::string seq) const {
+void DelCmd::printAfterCommand(IOCallback<UI>& ioCallback, bool isDeleted, size_t id, std::string name, std::string seq) const {
     std::string print;
 
     if (isDeleted) {
         print = "Deleted: [" + numTostring(id) + "] " + name + ": " + seq + "\n";
-        output.write(print.c_str());
+        ioCallback.runWrite(print.c_str());
     }
 
     else {
         print = "Deletion canceled\n";
-        output.write(print.c_str());
+        ioCallback.runWrite(print.c_str());
     }
 }
 

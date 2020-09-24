@@ -11,11 +11,11 @@ class SaveCmd: public ManagementCmd{
 public:
     /*virtual*/ ~SaveCmd(){};
     /*virtual*/ void createCMD(const Parser& params) ;
-    /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure , IReader& input, IWriter& output);
+    /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure , IOCallback<UI> &ioCallback);
 
 private:
     bool isValid(const Parser& params);
-    size_t getDnaId(const std::string &dna, StructureDna &dnaStructure, IWriter &output);
+    size_t getDnaId(const std::string &dna, StructureDna &dnaStructure, IOCallback<UI> &ioCallback);
 };
 
 #endif //DNA_SAVE_CMD_H

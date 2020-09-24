@@ -4,7 +4,10 @@
 
 #include <stdexcept>
 
+#include "create_cmd_factory.h"
 #include "creation_command.h"
+#include "parser.h"
+
 #include "enter_cmd.h"
 #include "new_cmd.h"
 #include "load_cmd.h"
@@ -16,7 +19,6 @@
 #include "find_cmd.h"
 #include "count_cmd.h"
 #include "findall_cmd.h"
-#include "create_cmd_factory.h"
 
 
 ICMD *CreateCmdFactory::create(const Parser& p) {
@@ -49,7 +51,7 @@ void CreateCmdFactory::init() {
 }
 
 void CreateCmdFactory::release() {
-    delete s_commands.at("empty");
+    delete s_commands.at("");
     delete s_commands.at("new");
     delete s_commands.at("load");
     delete s_commands.at("dup");

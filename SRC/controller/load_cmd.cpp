@@ -34,7 +34,7 @@ bool LoadCmd::isValid(const Parser &params) {
 }
 
 
-void LoadCmd::run(const Parser &params, StructureDna& dnaStructure , IReader& input, IWriter& output) {
+void LoadCmd::run(const Parser &params, StructureDna& dnaStructure ,IOCallback<UI> &ioCallback) {
     std::string dnaName, dnaSeq, fileName = params.getParams()[0];
     FileReader file(fileName);
     file.read();
@@ -54,7 +54,7 @@ void LoadCmd::run(const Parser &params, StructureDna& dnaStructure , IReader& in
         dnaName = params.getParams()[1].substr(1);
 
         if (dnaStructure.isExistDna(dnaName)){
-            output.write("This name is already exist. please enter again\n");
+            ioCallback.runWrite("This name is already exist. please enter again\n");
 
             return;
         }
@@ -62,11 +62,11 @@ void LoadCmd::run(const Parser &params, StructureDna& dnaStructure , IReader& in
 
     DnaMetaData* newDna = new DnaMetaData(dnaSeq, dnaName, (std::string)"new");
     dnaStructure.addDna(newDna);
-    printAfterCommand(dnaStructure, output);
+    printAfterCommand(dnaStructure, ioCallback);
 }
 
-void LoadCmd::printAfterCommand(StructureDna& dnaStructure ,IWriter& output) const {
-    DnaMetaData temp(dnaStructure.findDna(DnaMetaData::getLastId()-1));
+void LoadCmd::printAfterCommand(StructureDna& dnaStructure ,IOCallback<UI> &ioCallback) const {
+    DnaMetaData temp(dnaStructure.findDna(DnaMetaData::getLastId()));
     std::string dnaSeq = temp.getDnaSeq()->getSeq();
     size_t lngDna  = dnaSeq.size();
 
@@ -76,6 +76,6 @@ void LoadCmd::printAfterCommand(StructureDna& dnaStructure ,IWriter& output) con
     std::string strToPrint, idStr;
     idStr = numTostring(temp.getId());
     strToPrint = "[" + idStr + "]" + " " + temp.getName() +": " + dnaSeq + "\n";
-    output.write(strToPrint.c_str());
+    ioCallback.runWrite(strToPrint.c_str());
 }
 

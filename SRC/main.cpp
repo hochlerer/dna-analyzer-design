@@ -12,7 +12,7 @@ int main() {
     KeyboardReader read;
     ScreenWriter write;
     System s;
-    Terminal terminal;
+    Terminal terminal(read, write);
     s.startApp(terminal , read, write);
 
 

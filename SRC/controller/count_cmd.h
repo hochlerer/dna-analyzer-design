@@ -11,12 +11,12 @@ class CountCmd: public AnalysisCmd{
 public:
     /*virtual*/ ~CountCmd(){};
     /*virtual*/ void createCMD(const Parser& params);
-    /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure ,IReader& input ,IWriter& output);
+    /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure ,IOCallback<UI>& ioCallback);
 
 private:
-    void printAfterCommand(size_t count ,IWriter& output)const ;
+    void printAfterCommand(size_t count ,IOCallback<UI>& ioCallback)const ;
     bool isValid(const Parser& params);
-    size_t getDnaId(const std::string &dna, StructureDna &dnaStructure, IWriter &output);
+    size_t getDnaId(const std::string &dna, StructureDna &dnaStructure, IOCallback<UI>& ioCallback);
 };
 
 

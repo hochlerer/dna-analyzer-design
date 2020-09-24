@@ -33,7 +33,7 @@ bool RenameCmd::isValid(const Parser &params) {
     return true;
 }
 
-size_t RenameCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWriter &output) {
+size_t RenameCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IOCallback<UI>& ioCallback) {
     std::string dnaName;
     size_t dnaId;
 
@@ -41,7 +41,7 @@ size_t RenameCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, I
         dnaName = dna.substr(1);
 
         if (!dnaStructure.isExistDna(dnaName)){
-            output.write("Name not exist. please enter again\n");
+            ioCallback.runWrite("Name not exist. please enter again\n");
 
             return 0;
         }
@@ -52,7 +52,7 @@ size_t RenameCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, I
         dnaId = stringToNum(dna.substr(1));
 
         if (!dnaStructure.isExistDna(dnaId)){
-            output.write("Id not exist. please enter again\n");
+            ioCallback.runWrite("Id not exist. please enter again\n");
 
             return 0;
         }
@@ -61,8 +61,8 @@ size_t RenameCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, I
     return dnaId;
 }
 
-void RenameCmd::run(const Parser &params, StructureDna &dnaStructure, IReader &input, IWriter &output) {
-    size_t currDnaId = getDnaId(params.getParams()[0], dnaStructure, output);
+void RenameCmd::run(const Parser &params, StructureDna &dnaStructure, IOCallback<UI>& ioCallback) {
+    size_t currDnaId = getDnaId(params.getParams()[0], dnaStructure, ioCallback);
 
     if (0 == currDnaId){
 
@@ -71,7 +71,7 @@ void RenameCmd::run(const Parser &params, StructureDna &dnaStructure, IReader &i
     std::string newName = params.getParams()[1].substr(1);
 
     if (dnaStructure.isExistDna(newName)){
-        output.write("the name is already exist. please enter again\n");
+        ioCallback.runWrite("the name is already exist. please enter again\n");
 
         return;
     }

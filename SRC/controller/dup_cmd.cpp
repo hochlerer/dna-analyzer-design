@@ -39,7 +39,7 @@ bool DupCmd::isValid(const Parser &params) {
 }
 
 
-size_t DupCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWriter &output) {
+size_t DupCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IOCallback<UI> &ioCallback) {
     std::string dnaName;
     size_t dnaId;
 
@@ -47,7 +47,7 @@ size_t DupCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWri
         dnaName = dna.substr(1);
 
         if (!dnaStructure.isExistDna(dnaName)){
-            output.write("Name not exist. please enter again\n");
+            ioCallback.runWrite("Name not exist. please enter again\n");
 
             return 0;
         }
@@ -58,7 +58,7 @@ size_t DupCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWri
         dnaId = stringToNum(dna.substr(1));
 
         if (!dnaStructure.isExistDna(dnaId)){
-            output.write("Id not exist. please enter again\n");
+            ioCallback.runWrite("Id not exist. please enter again\n");
 
             return 0;
         }
@@ -67,8 +67,8 @@ size_t DupCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWri
     return dnaId;
 }
 
-void DupCmd::run(const Parser &params, StructureDna& dnaStructure ,IReader& input ,IWriter& output) {
-    size_t dnaId = getDnaId(params.getParams()[0], dnaStructure, output);
+void DupCmd::run(const Parser &params, StructureDna& dnaStructure ,IOCallback<UI> &ioCallback) {
+    size_t dnaId = getDnaId(params.getParams()[0], dnaStructure, ioCallback);
 
     if (0 == dnaId){
 
@@ -80,7 +80,7 @@ void DupCmd::run(const Parser &params, StructureDna& dnaStructure ,IReader& inpu
         dnaName = params.getParams()[1].substr(1);
 
         if (dnaStructure.isExistDna(dnaName)){
-            output.write("the name is already exist. please enter again\n");
+            ioCallback.runWrite("the name is already exist. please enter again\n");
 
             return;
         }
@@ -91,15 +91,15 @@ void DupCmd::run(const Parser &params, StructureDna& dnaStructure ,IReader& inpu
     }
     DnaMetaData* newDna = new DnaMetaData(dnaSeq, dnaName, (std::string)"new");
     dnaStructure.addDna(newDna);
-    printAfterCommand(dnaStructure, output);
+    printAfterCommand(dnaStructure, ioCallback);
 }
 
-void DupCmd::printAfterCommand(StructureDna& dnaStructure ,IWriter& output)const {
+void DupCmd::printAfterCommand(StructureDna& dnaStructure ,IOCallback<UI> &ioCallback)const {
     DnaMetaData temp(dnaStructure.findDna(DnaMetaData::getLastId()));
     std::string strToPrint, idStr;
     idStr = numTostring(temp.getId());
     strToPrint = "[" + idStr + "]" + " " + temp.getName() + ": " + temp.getDnaSeq()->getSeq() + "\n";
-    output.write(strToPrint.c_str());
+    ioCallback.runWrite(strToPrint.c_str());
 }
 
 
@@ -118,25 +118,4 @@ std::string DupCmd::getNameById(size_t id, StructureDna& dnaStructure ){
     return dnaName;
 }
 
-//
-//void DupCmd::getNameByName(const Parser &params, StructureDna &dnaStructure) {
-//    std::string dnaName, dnaSeq, name= params.getParams()[0].substr(1) ;
-//
-//    dnaSeq = dnaStructure.findDna(name).getDnaSeq()->getSeq();
-//
-//    if (params.getParams().size() == 1 ){
-//        (dnaStructure.findDna(name)).increaseCounter();
-//        dnaName = name + "_" + numTostring(dnaStructure.findDna(name).getCounter());
-//
-//        while (dnaStructure.isExistDna(dnaName)) {
-//            dnaStructure.findDna(name).increaseCounter();
-//            dnaName = name + "_" + numTostring(dnaStructure.findDna(name).getCounter());
-//        }
-//    }
-//
-//    else {
-//        dnaName = params.getParams()[1];
-//    }
-//    DnaMetaData* newDna = new DnaMetaData(dnaSeq, dnaName, (std::string)"new");
-//    dnaStructure.addDna(newDna);
-//}
+

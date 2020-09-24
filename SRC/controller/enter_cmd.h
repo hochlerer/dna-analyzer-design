@@ -12,7 +12,7 @@ class EnterCmd: public ICMD{
 public:
     /*virtual*/ ~EnterCmd() {}
     /*virtual*/ void createCMD(const Parser& params) ;
-    /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure , IReader& input, IWriter& output);
+    /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure , IOCallback<UI>& ioCallback);
 
 private:
 };

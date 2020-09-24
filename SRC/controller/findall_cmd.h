@@ -11,12 +11,12 @@ class FindallCmd: public AnalysisCmd{
 public:
     /*virtual*/ ~FindallCmd(){};
     /*virtual*/ void createCMD(const Parser& params);
-    /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure ,IReader& input ,IWriter& output);
+    /*virtual*/ void run(const Parser& params, StructureDna& dnaStructure ,IOCallback<UI>& ioCallback);
 
 private:
-    void printAfterCommand(std::list<size_t> indexes ,IWriter& output)const ;
+    void printAfterCommand(std::list<size_t> indexes ,IOCallback<UI>& ioCallback)const ;
     bool isValid(const Parser& params);
-    size_t getDnaId(const std::string &dna, StructureDna &dnaStructure, IWriter &output);
+    size_t getDnaId(const std::string &dna, StructureDna &dnaStructure, IOCallback<UI>& ioCallback);
 };
 
 #endif //DNA_FINDALL_CMD_H

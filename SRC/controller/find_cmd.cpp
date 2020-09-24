@@ -27,7 +27,7 @@ bool FindCmd::isValid(const Parser &params) {
     return true;
 }
 
-size_t FindCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWriter &output) {
+size_t FindCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IOCallback<UI>& ioCallback) {
     std::string dnaName;
     size_t dnaId;
 
@@ -35,7 +35,7 @@ size_t FindCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWr
         dnaName = dna.substr(1);
 
         if (!dnaStructure.isExistDna(dnaName)){
-            output.write("Name not exist. please enter again\n");
+            ioCallback.runWrite("Name not exist. please enter again\n");
 
             return 0;
         }
@@ -46,7 +46,7 @@ size_t FindCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWr
         dnaId = stringToNum(dna.substr(1));
 
         if (!dnaStructure.isExistDna(dnaId)){
-            output.write("Id not exist. please enter again\n");
+            ioCallback.runWrite("Id not exist. please enter again\n");
 
             return 0;
         }
@@ -56,8 +56,8 @@ size_t FindCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWr
 }
 
 
-void FindCmd::run(const Parser &params, StructureDna &dnaStructure ,IReader& input ,IWriter &output) {
-    size_t index, id = getDnaId(params.getParams()[0], dnaStructure, output), subId;
+void FindCmd::run(const Parser &params, StructureDna &dnaStructure ,IOCallback<UI>& ioCallback) {
+    size_t index, id = getDnaId(params.getParams()[0], dnaStructure, ioCallback), subId;
 
     if (0 == id){
 
@@ -66,7 +66,7 @@ void FindCmd::run(const Parser &params, StructureDna &dnaStructure ,IReader& inp
     std::string subDna = params.getParams()[1];
 
     if ('@' == subDna[0] || '#' == subDna[0]){
-        subId = getDnaId(subDna, dnaStructure, output);
+        subId = getDnaId(subDna, dnaStructure, ioCallback);
 
         if (0 == subId){
 
@@ -79,14 +79,14 @@ void FindCmd::run(const Parser &params, StructureDna &dnaStructure ,IReader& inp
     index = originalDna->findSubDna(subDna);
 
     if (index > originalDna->getLength()){
-        output.write((subDna + " is not a substring of " + originalDna->getSeq() + "\n").c_str());
+        ioCallback.runWrite((subDna + " is not a substring of " + originalDna->getSeq() + "\n").c_str());
     }
 
     else {
-        printAfterCommand(index, output);
+        printAfterCommand(index, ioCallback);
     }
 }
 
-void FindCmd::printAfterCommand(size_t index, IWriter &output) const {
-    output.write((numTostring(index) + "\n").c_str());
+void FindCmd::printAfterCommand(size_t index, IOCallback<UI>& ioCallback) const {
+    ioCallback.runWrite((numTostring(index) + "\n").c_str());
 }

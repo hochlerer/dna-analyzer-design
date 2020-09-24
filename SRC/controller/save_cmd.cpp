@@ -36,7 +36,7 @@ bool SaveCmd::isValid(const Parser &params) {
     return true;
 }
 
-size_t SaveCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWriter &output){
+size_t SaveCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IOCallback<UI> &ioCallback){
     std::string dnaName;
     size_t dnaId;
 
@@ -44,7 +44,7 @@ size_t SaveCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWr
         dnaName = dna.substr(1);
 
         if (!dnaStructure.isExistDna(dnaName)){
-            output.write("Name not exist. please enter again\n");
+            ioCallback.runWrite("Name not exist. please enter again\n");
 
             return 0;
         }
@@ -55,7 +55,7 @@ size_t SaveCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWr
         dnaId = stringToNum(dna.substr(1));
 
         if (!dnaStructure.isExistDna(dnaId)){
-            output.write("Id not exist. please enter again\n");
+            ioCallback.runWrite("Id not exist. please enter again\n");
 
             return 0;
         }
@@ -64,8 +64,8 @@ size_t SaveCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWr
     return dnaId;
 }
 
-void SaveCmd::run(const Parser &params, StructureDna &dnaStructure, IReader& input, IWriter &output) {
-    size_t id = getDnaId(params.getParams()[0], dnaStructure, output);
+void SaveCmd::run(const Parser &params, StructureDna &dnaStructure, IOCallback<UI> &ioCallback) {
+    size_t id = getDnaId(params.getParams()[0], dnaStructure, ioCallback);
 
     if (0 == id){
 

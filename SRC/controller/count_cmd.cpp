@@ -27,7 +27,7 @@ bool CountCmd::isValid(const Parser &params) {
     return true;
 }
 
-size_t CountCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IWriter &output) {
+size_t CountCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IOCallback<UI>& ioCallback) {
     std::string dnaName;
     size_t dnaId;
 
@@ -35,7 +35,7 @@ size_t CountCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IW
         dnaName = dna.substr(1);
 
         if (!dnaStructure.isExistDna(dnaName)){
-            output.write("Name not exist. please enter again\n");
+            ioCallback.runWrite("Name not exist. please enter again\n");
 
             return 0;
         }
@@ -46,7 +46,7 @@ size_t CountCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IW
         dnaId = stringToNum(dna.substr(1));
 
         if (!dnaStructure.isExistDna(dnaId)){
-            output.write("Id not exist. please enter again\n");
+            ioCallback.runWrite("Id not exist. please enter again\n");
 
             return 0;
         }
@@ -56,8 +56,8 @@ size_t CountCmd::getDnaId(const std::string &dna, StructureDna &dnaStructure, IW
 }
 
 
-void CountCmd::run(const Parser &params, StructureDna &dnaStructure ,IReader& input ,IWriter &output) {
-    size_t count, id = getDnaId(params.getParams()[0], dnaStructure, output), subId;
+void CountCmd::run(const Parser &params, StructureDna &dnaStructure ,IOCallback<UI>& ioCallback) {
+    size_t count, id = getDnaId(params.getParams()[0], dnaStructure, ioCallback), subId;
 
     if (0 == id){
 
@@ -66,7 +66,7 @@ void CountCmd::run(const Parser &params, StructureDna &dnaStructure ,IReader& in
     std::string subDna = params.getParams()[1];
 
     if ('@' == subDna[0] || '#' == subDna[0]){
-        subId = getDnaId(subDna, dnaStructure, output);
+        subId = getDnaId(subDna, dnaStructure, ioCallback);
 
         if (0 == subId){
 
@@ -80,14 +80,14 @@ void CountCmd::run(const Parser &params, StructureDna &dnaStructure ,IReader& in
     count = originalDna->countSubDna(subDna);
 
     if (0 == originalDna->getLength()){
-        output.write((subDna + " is not a substring of " + originalDna->getSeq() + "\n").c_str());
+        ioCallback.runWrite((subDna + " is not a substring of " + originalDna->getSeq() + "\n").c_str());
     }
 
     else {
-        printAfterCommand(count, output);
+        printAfterCommand(count, ioCallback);
     }
 }
 
-void CountCmd::printAfterCommand(size_t count, IWriter &output) const {
-    output.write((numTostring(count) + "\n").c_str());
+void CountCmd::printAfterCommand(size_t count, IOCallback<UI>& ioCallback) const {
+    ioCallback.runWrite((numTostring(count) + "\n").c_str());
 }

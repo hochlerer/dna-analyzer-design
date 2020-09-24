@@ -6,16 +6,18 @@
 #define DNA_CALLBACK_H
 class Parser;
 class StructureDna;
-class IReader;
-class IWriter;
+//class IReader;
+//class IWriter;
+#include "io_callback.h"
 
+class UI;
 
 template<class cInstance>
 class Callback{
 public:
-    typedef void (cInstance::*pMethod)(Parser &p, StructureDna &dnaStructure, IReader &input, IWriter &output);
+    typedef void (cInstance::*pMethod)(Parser &p, StructureDna &dnaStructure, IOCallback<UI>& ioCallback);
     Callback(cInstance &instance, pMethod method):m_inst(instance), m_method(method){}
-    void operator()(Parser &p, StructureDna &dnaStructure, IReader &input, IWriter &output) const;
+    void operator()(Parser &p, StructureDna &dnaStructure, IOCallback<UI>& ioCallback) const;
 
 private:
     cInstance& m_inst;
@@ -23,8 +25,8 @@ private:
 };
 
 template<class cInstance>
-void Callback<cInstance>::operator()(Parser &p, StructureDna &dnaStructure, IReader &input, IWriter &output) const {
-    (m_inst.*m_method)(p, dnaStructure, input, output);
+void Callback<cInstance>::operator()(Parser &p, StructureDna &dnaStructure, IOCallback<UI>& ioCallback) const {
+    (m_inst.*m_method)(p, dnaStructure, ioCallback);
 }
 
 #endif //DNA_CALLBACK_H

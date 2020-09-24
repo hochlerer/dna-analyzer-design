@@ -6,17 +6,18 @@
 #include "../controller/system.h"
 #include "../controller/parser.h"
 #include "../controller/create_cmd_factory.h"
+//#include "../controller/io_callback.h"
 #include "IWriter.h"
 #include "IReader.h"
 
 
 void Terminal::start(Callback<System> &callback, IReader &input, IWriter &output, StructureDna &dnaStructure) {
-    CreateCmdFactory::init();
+    IOCallback<UI> ioCallback(*this, &UI::read, &UI::write);
 
     while (true){
         Parser p;
-        output.write("> cmd >>> ");
-        input.read();
+        write("> cmd >>> ");
+        read();
         p.parseCmd(input.getStr());
 
         if (p.getCmdName() == "quit") {
@@ -24,14 +25,22 @@ void Terminal::start(Callback<System> &callback, IReader &input, IWriter &output
         }
 
         try {
-            callback(p, dnaStructure, input, output);
+            callback(p, dnaStructure, ioCallback);
         }
 
         catch (std::exception &e) {
-            output.write(e.what());
-            output.write("\nplease enter again\n");
+            write(e.what());
+//            output.write("\nplease enter again\n");
+            write("\n");
         }
     }
-    CreateCmdFactory::release();
 }
 
+void Terminal::write(const std::string& output) const {
+    m_output.write(output.c_str());
+}
+
+const std::string& Terminal::read() const {
+    m_input.read();
+    return m_input.getStr();
+}
