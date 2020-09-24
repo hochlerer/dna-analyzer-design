@@ -5,7 +5,7 @@
 #include <stdexcept>
 
 #include "creation_command.h"
-#include "empty_cmd.h"
+#include "enter_cmd.h"
 #include "new_cmd.h"
 #include "load_cmd.h"
 #include "dup_cmd.h"
@@ -28,16 +28,14 @@ ICMD *CreateCmdFactory::create(const Parser& p) {
 
     catch (std::out_of_range &e) {
 
-        s_commands.at("empty")->createCMD(p);
-
-        return s_commands.at("empty");
+        throw std::invalid_argument("COMMAND NOT FOUND");
     }
 }
 
 std::map<std::string, ICMD*> CreateCmdFactory::s_commands;
 
 void CreateCmdFactory::init() {
-    s_commands.insert(std::pair<std::string, ICMD*> ("empty", new EmptyCmd));
+    s_commands.insert(std::pair<std::string, ICMD*> ("", new EnterCmd));
     s_commands.insert(std::pair<std::string, ICMD*> ("new", new NewCmd));
     s_commands.insert(std::pair<std::string, ICMD*> ("load", new LoadCmd));
     s_commands.insert(std::pair<std::string, ICMD*> ("dup", new DupCmd));
