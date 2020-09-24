@@ -15,6 +15,8 @@ public:
     const std::vector<std::string>& getParams()const {return m_params;}
 
 private:
+    void setName(std::string &cmd);
+    void setParams(std::string &cmd);
     std::string m_commandName;
     std::vector<std::string> m_params;
 };
